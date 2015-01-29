@@ -1,2 +1,2 @@
-# here-maps-angular
+# here-maps
 Web Component wrapper for Nokia HERE using Angular
