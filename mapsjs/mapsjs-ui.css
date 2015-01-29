@@ -1,0 +1,394 @@
+/*
+ * Explanation why the layout looks so complicated:
+ * The UI container needs a position (absolute or relative) to prevent z-index issues (DomMarker on top of UI)
+ * Therefore it has these additional styles:
+ *    position: absolute;
+ *    width: 100%;
+ *    height: 100%;
+ * To prevent that the UI container captures all events the container is displaced by
+ *   left: 100%;
+ * To neutralize the displacement for the UI elements within the UI container the following adjustments are needed:
+ *  - InfoBubble (.H_ib):            left: -100%;
+ *  - left anchor (.H_l_left):       margin-left: -100%;
+ *  - center anchor (.H_l_center):   left: -50%;            (was left: 50%)
+ *  - right anchor (.H_l_right):     right: 100%;           (was right: 0)
+ *                                        margin-left: -100%;
+ */
+
+.H_ui {
+  font-size: 10px;
+  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
+  -ms-user-select: none;
+
+  z-index: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 100%;
+}
+.H_ui * {
+  /* normalize in case some other normalization CSS likes things differently */
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+}
+.H_noevs {
+  pointer-events: none;
+}
+
+/*
+ * Layout
+ */
+.H_l_left {
+  position: absolute;
+  left: 0;
+  margin-left: -100%;
+}
+.H_l_center {
+  position: absolute;
+  left: -50%;
+}
+.H_l_right {
+  position: absolute;
+  right: 100%;
+  margin-left: -100%;
+}
+.H_l_top {
+  top: 0;
+}
+.H_l_middle {
+  top: 50%;
+}
+.H_l_bottom {
+  bottom: 0;
+}
+
+.H_l_horizontal .H_ctl {
+  float: left;
+}
+
+.H_l_anchor {
+  clear: both;
+}
+
+.H_l_vertical .H_ctl {
+  clear: both;
+}
+.H_l_right .H_l_vertical .H_ctl {
+  float: right;
+}
+
+/**
+ *  Element styles
+ */
+
+.H_ctl {
+  margin: .6em;
+  position: relative;
+  cursor: pointer;
+  -ms-touch-action: none;
+}
+
+.H_btn,
+.H_rdo li {
+  background: #1f262a;
+  border-radius: 2em;
+  color: #fff;
+  padding: .4em;
+  -webkit-transform: trasnlate3d(0, 1, 0);
+}
+
+.H_rdo {
+  color: white;
+  padding-bottom: .5em;
+  margin-bottom: .5em;
+  border-bottom: .1em solid #4A5B65;
+}
+.H_rdo_title {
+  text-transform: uppercase;
+  color: #dbe1e4;
+  margin-bottom: 1em;
+
+}
+.H_rdo ul {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.H_active,
+.H_rdo li.H_active {
+  background: #4A5B65;
+}
+
+.H_disabled,
+.H_active.H_disabled {
+  color: #5A6166;
+  cursor: default;
+}
+
+
+/**
+ *   Base Elements
+ */
+.H_l_vertical .H_grp>.H_btn {
+  border-radius: 0;
+}
+.H_l_vertical .H_grp>div:first-child {
+  -webkit-border-top-left-radius: 2em;
+  -webkit-border-top-right-radius: 2em;
+  -moz-border-radius-topleft: 2em;
+  -moz-border-radius-topright: 2em;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+  padding-top: 1em;
+}
+.H_l_vertical .H_grp>div:last-child {
+  -webkit-border-bottom-right-radius: 2em;
+  -webkit-border-bottom-left-radius: 2em;
+  -moz-border-radius-bottomright: 2em;
+  -moz-border-radius-bottomleft: 2em;
+  border-bottom-right-radius: 2em;
+  border-bottom-left-radius: 2em;
+  padding-bottom: 1em;
+}
+
+.H_l_horizontal .H_grp>.H_btn,
+.H_l_vertical .H_ctl {
+  border-radius: 0;
+  float: left;
+}
+.H_l_horizontal .H_grp>div:first-child {
+  -webkit-border-top-left-radius: 2em;
+  -webkit-border-bottom-left-radius: 2em;
+  -moz-border-radius-topleft: 2em;
+  -moz-border-radius-bottomleft: 2em;
+  border-top-left-radius: 2em;
+  border-bottom-left-radius: 2em;
+  padding-left: 1em;
+}
+.H_l_horizontal .H_grp>div:last-child {
+  -webkit-border-top-right-radius: 2em;
+  -webkit-border-bottom-right-radius: 2em;
+  -moz-border-radius-topright: 2em;
+  -moz-border-radius-bottomright: 2em;
+  border-top-right-radius: 2em;
+  border-bottom-right-radius: 2em;
+  padding-right: 1em;
+}
+
+
+/** Menu panel */
+.H_overlay {
+  position: absolute;
+  min-width: 15em;
+  background: #1F262A;
+  display: none;
+  padding: 1em;
+  z-index: 100;
+}
+.H_overlay>*:last-child {
+  clear: both;
+}
+.H_overlay>.H_btn {
+  white-space: nowrap;
+}
+
+.H_overlay.H_open {
+  display: block;
+}
+
+.H_overlay::after {
+  content: " ";
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  position: absolute;
+}
+.H_overlay.H_left::after {
+  border-width: 1em 1em 1em 0;
+  border-color: transparent #1F262A transparent transparent;
+  left: -1em;
+}
+.H_overlay.H_right::after {
+  border-width: 1em 0 1em 1em;
+  border-color: transparent transparent transparent #1F262A;
+  left: 100%;
+}
+.H_overlay.H_top::after {
+  top: .5em;
+}
+.H_overlay.H_bottom::after {
+  bottom: .5em;
+}
+.H_overlay.H_middle::after {
+  top: 50%;
+  margin-top: -1em;
+}
+.H_overlay.H_top.H_center::after {
+  border-width: 0 1em 1em 1em;
+  border-color: transparent transparent #1F262A transparent;
+  top: -1em;
+  left: 50%;
+  margin-left: -1em;
+}
+.H_overlay.H_bottom.H_center::after {
+  border-width: 1em 1em 0 1em;
+  border-color: #1F262A transparent transparent transparent;
+  bottom: -1em;
+  left: 50%;
+  margin-left: -1em;
+}
+
+
+/** InfoBubble */
+.H_ib {
+  position: absolute;
+  left: .91em;
+  background: #000;
+  color: #fff;
+  font-size: 2em;
+  line-height: 1em;
+  fill: #000;
+  left: -100%;
+  -moz-user-select: initial;
+  -khtml-user-select: initial;
+  -webkit-user-select: initial;
+  -o-user-select: initial;
+  -ms-user-select: initial;
+}
+.H_ib_tail {
+  position: absolute;
+  left: -.3em;
+  bottom: -.5em;
+  width: 1.2em;
+  height: 1.2em;
+  z-index: 100;
+}
+.H_ib_notail .H_ib_tail {
+  display: none;
+}
+.H_ib_body {
+  background: #000;
+  position: absolute;
+  bottom: .5em;
+  padding: 0 1.2em 0 0;
+  border-radius: .2em;
+  margin-right: -1em;
+  right: 0;
+}
+.H_ib_close {
+  font-size: .6em;
+  position: absolute;
+  right: .2em;
+  top: .2em;
+  cursor: pointer;
+  fill: #fff;
+}
+.H_disabled .H_ib_close {
+  cursor: default;
+}
+
+.H_ib_noclose .H_ib_close {
+  display: none;
+}
+.H_ib_noclose .H_ib_body {
+  padding: 0 0 0 0;
+}
+
+.H_ib_content {
+  min-width: 6em;
+  margin: .2em 0;
+  padding: 0 .2em;
+}
+
+
+/**
+ *   ScaleBar
+ */
+
+.H_scalebar_svg {
+    display: block;
+}
+
+/**
+ *   Panorama
+ */
+.H_pano_mm {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  font-size: 1.5em;
+  width: 0;
+  height: 0;
+}
+
+.H_pano_man {
+  margin-top: -3em;
+  z-index: 2;
+}
+
+.H_pano_notransition {
+  transition: none !important;
+}
+
+
+.H_pano_circle {
+  margin-top: -1em;
+  margin-left: -1em;
+  transition: all .3s;
+  pointer-events: none;
+}
+.H_disabled .H_pano_circle {
+  transition: none;
+  margin-left: -.1em;
+}
+
+.H_disabled .H_pano_mm svg.H_icon, {
+  fill: #ddd;
+  stroke: #5A6166;
+}
+
+
+.H_pano_man svg.H_icon,
+.H_pano_circle svg.H_icon {
+  fill: #09b;
+  stroke: #fff;
+  pointer-events: none;
+}
+
+.H_pano_ib {
+  cursor: pointer;
+}
+
+.H_tib {
+  margin: 1em 0 1em 1em;
+  font-size: .5em;
+  width: 30em;
+}
+.H_tib p { margin: .5em 0; padding: 0; line-height: 1.3em; }
+.H_tib p.H_tib_desc { border-top: 1px solid #666; padding-top: .5em; }
+.H_tib .H_tib_time { color: #aaa; }
+.H_tib_right { float:right; }
+
+/*
+ *   ICONS
+ */
+svg.H_icon {
+  display: inline;
+  width: 2em;
+  height: 2em;
+  fill: #fff;
+  margin: 0 0 -.2em 0;
+}
+.H_active svg.H_icon {
+  fill: #fff;
+}
+.H_disabled svg.H_icon,
+.H_active.H_disabled {
+  fill: #5A6166;
+}
