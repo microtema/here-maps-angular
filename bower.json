@@ -1,6 +1,6 @@
 {
   "name": "here-maps-angular",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "homepage": "https://github.com/sevenfate/here-maps-angular.git",
   "authors": [
     "'Mario <'7fate@web.de'>"
@@ -22,7 +22,8 @@
     "node_modules",
     "test",
     "scripts",
-    "bower_components"
+    "bower_components",
+    "bower_components/angular"
   ],
   "dependencies": {
     "angular": "^1.3.11",
