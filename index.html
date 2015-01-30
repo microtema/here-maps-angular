@@ -3,14 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>AngularJS Nokia HERE Maps Directive</title>
-    <meta name="description" content="Nokia HERE Maps Directive.">
+    <meta "name"="description" content="Nokia HERE Maps Directive.">
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/headjs/dist/1.0.0/head.js"></script>
-    <link type="text/css" rel="stylesheet" href="/css/here-maps-angular.css" />
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <link type="text/css" rel="stylesheet" href="/css/here-maps-angular.css"/>
+    <style>
+        html {
+            height: 100%;
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: arial, sans-serif;
+            font-size: 16px;
+            margin: 0;
+            color: #333;
+        }
+    </style>
 </head>
 <body data-ng-app="here-maps-angular">
-<div data-here-maps="" data-app-token='{"App_Id":"b1EnEFoJUlM7DxbOUluz", "App_Code": "9l73AMb88mO7U-udRkrIUQ"}'>
-    [{"city":"Karlsruhe", "zip": "76131"}]
+<div style="width: 680px">
+    <div data-here-maps="" data-app-token='{"App_Id":"b1EnEFoJUlM7DxbOUluz", "App_Code": "9l73AMb88mO7U-udRkrIUQ"}'>[
+        {
+        "name": "coords only", "lat": 48.5, "lng": 8
+        }
+        ,
+        {
+        "name": "Mrs. Sporty", "lat": 52.3666382, "lng": 13.4077702
+        }
+        ,
+        {
+        "name": "Karstadt Sports",
+        "street": "Joachimstaler Straße 5",
+        "zip": "10623",
+        "city": "Berlin"
+        }
+        ,
+        {
+        "name": "Sport-Oase",
+        "street": "Stromstraße 11",
+        "zip": "10551",
+        "city": "Berlin"
+        }
+        ,
+        {
+        "name": "Mini Zoo",
+        "street": "Gottesauer 18",
+        "zip": "76131",
+        "zoom": 5,
+        "city": "Karlsruhe",
+        "lat": 49.0067406, "lng": 8.4201603
+        }
+        ,
+        {
+        "name": "Schul- und Sportamt",
+        "street": "Blumenstraße 2a",
+        "zip": "76133",
+        "city": "Karlsruhe"
+        }
+        ,
+        {
+        "name": "Sport 2000",
+        "street": "Pyhrnstraße 7",
+        "zip": "4580",
+        "city": "Windischgarsten"
+        }
+        ,
+        {
+        "name": "Loch Sport",
+        "street": "Pyhrnstraße 7",
+        "zip": "4580",
+        "city": "Windischgarsten"
+        }
+        ,
+        {
+        "name": "Loch Sport",
+        "street": "Pyhrnstraße 7",
+        "zip": "4580",
+        "city": "Windischgarsten"
+        }
+        ,
+        {
+        "name": "Schul- und Sportamt",
+        "street": "Blumenstraße 2a",
+        "zip": "76133",
+        "city": "Karlsruhe"
+        }]</div>
 </div>
 
 <script src="here-maps-angular.js"></script>

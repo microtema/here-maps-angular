@@ -70,9 +70,8 @@ describe('A Platform Service Spec', function () {
         var element = $(sut.createPlacesTableBody());
 
         expect(element.length).toBe(1);
-        expect(element.attr("class")).toBe("tbody");
 
-        expect(element.find("div.container-list").length).toBe(1);
+        expect(element.find("td.tbody div.container-list").length).toBe(1);
     });
 
     it("should create heremap-places container-list container", function () {
@@ -150,7 +149,6 @@ describe('A Platform Service Spec', function () {
         var element = $(sut.createPlacesTableFoot());
 
         expect(element.length).toBe(1);
-        expect(element.attr("class")).toBe("tfoot");
         expect(element.find("span").length).toBe(3);
 
         var span = element.find("span[data-ng-click='pagedList.prevPage()']");

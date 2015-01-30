@@ -52,6 +52,8 @@
     background-position: left 50%;
     width: 25px;
     height: 20px;
+    display: block;
+    float: right;
 }
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody {
     vertical-align: top;
@@ -59,9 +61,14 @@
 }
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list {
     width: 200px;
-    height: 100%;
+    height: auto;
     overflow: auto;
     overflow-x: hidden;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li {
     border-bottom: dotted 1px #b2b2b2;
@@ -86,6 +93,7 @@
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li > svg {
     position: absolute;
     margin-left: -22px;
+    cursor: pointer;
 }
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li > b {
     display: block;
@@ -107,9 +115,17 @@
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li span.index {
     font-size: 11px;
     color: #e9144b;
+    line-height: 1;
 }
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li span.link {
     display: block;
+    margin-bottom: 10px;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li span.zoom-in {
+    float: left;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li span.get-direction {
+   float: right;
 }
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li span.link span {
     color: #e9144b;

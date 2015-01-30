@@ -22,7 +22,7 @@ describe('A Platform Service Spec', function () {
     beforeEach(function (done) {
         setTimeout(function () {
             done();
-        }, 100);
+        }, 250);
     });
 
     it("should not be loaded on demand", function (done) {
