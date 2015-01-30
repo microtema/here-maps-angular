@@ -1,5 +1,6 @@
 # Created by .ignore support plugin (hsz.mobi)
 **/.*
 *.iml
-node_modules
+node_modules/
+scripts
 bower_components
