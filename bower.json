@@ -23,6 +23,7 @@
     "bower_components"
   ],
   "dependencies": {
-    "angular": "^1.2.0"
+    "angular": "^1.3.11",
+    "headjs" : "1.0.3"
   }
 }

@@ -3,7 +3,7 @@
 describe('A Mock', function () {
 
     it("test", function () {
-        expect(true).toBe(true);
+        expect('foo').toBe('foo');
     });
 
 });
