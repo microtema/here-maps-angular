@@ -128,7 +128,56 @@ app.service("Geocoding", function (Platform, GeocodeConverter, $q) {
     };
     return service;
 });
-app.service("HereMapsRouting", function () {
+app.service("HereMapsRouting", function ($window, $q) {
+    var routing = {
+        direction: function HereMapsRouting_direction(toAddress) {
+            return routing.geoLocation().then(function geoLocation_proxy(attPosition) {
+                var at = routing.createWayPointParam(attPosition);
+                var to = routing.createWayPointParam([toAddress.lat, toAddress.lng]);
+                //var url = "https://here.com/directions/drive/" + at + "/" + to;
+                var url = "https://www.here.com/directions/drive/start:" + at + "/"+(toAddress.name||"end")+":" + to;
+
+                console.info("routing to:", url);
+                $window.open(url, "_blank");
+            });
+        },
+        at: [0, 0],
+        geoLocation: function geoLocation() {
+
+            var defer = $q.defer();
+            if (routing.at[0]) {
+                defer.resolve(at);
+            } else {
+                routing._geoLocation(defer)
+            }
+
+            return defer.promise;
+        },
+        _geoLocation: function _geoLocation(defer) {
+            // We need to check if the browser has the correct capabilities.
+            if (navigator.geolocation) {
+                // If so, get the current position and feed it to $scope.at
+                // (or set $scope.at = [0,0] if there was a problem)
+                navigator.geolocation.getCurrentPosition(function getCurrentPosition_success(position) {
+                    routing.at = [position.coords.latitude, position.coords.longitude];
+                    defer.resolve(routing.at);
+                }, function getCurrentPosition_error() {
+                    //The page could not get your location. return the default one
+                    defer.resolve(routing.at);
+                });
+
+            } else {
+                // If the browser isn't geo-capable, take default one.
+                defer.resolve(routing.at);
+            }
+        },
+        createWayPointParam: function createWayPointParam(point) {
+            //return "[" + point.join(",") + "]";
+            return point.join(",");
+        }
+    };
+
+    return routing;
 
 });
 app.service("Template", function () {
@@ -380,7 +429,7 @@ function HereMapsController($scope, $element, $window, $timeout, HereMapsRouting
             return; //fast clicker go home
         }
         $scope.loading = true;
-        HereMapsRouting.direction([address.lat, address.lng]).then($scope.releaseLoading, $scope.releaseLoading);
+        HereMapsRouting.direction(address).then($scope.releaseLoading, $scope.releaseLoading);
     };
 
     $scope.zoomIn = function HereMapsController_zoomIn(address) {
