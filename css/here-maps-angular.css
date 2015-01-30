@@ -1,0 +1,158 @@
+/* Nokia HERE maps */
+.heremap-wrapper .heremap-outer-container {
+    position: relative;
+    height: 0;
+    padding-bottom: 75%;
+}
+.heremap-wrapper .heremap-outer-container .heremap {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    border: solid 1px #b2b2b2;
+    z-index: 1;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 200px;
+    z-index: 2;
+    overflow: hidden;
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1px solid #d2d2d2;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table {
+    width: 100%;
+    height: 100%;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td {
+    padding: 0;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.thead {
+    height: 27px;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #eaeaea;
+    cursor: pointer;
+    color: #999;
+    font-size: 11px;
+    font-weight: bold;
+    padding-left: 10px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.thead i {
+    background-image: url("/img/icon_nav_more.png");
+    background-repeat: no-repeat;
+    background-position: left 50%;
+    width: 25px;
+    height: 20px;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody {
+    vertical-align: top;
+    height: 100%;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list {
+    width: 200px;
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li {
+    border-bottom: dotted 1px #b2b2b2;
+    padding: 10px 10px 10px 27px;
+    margin-top: 0;
+    -webkit-border-radius: 0;
+    /* Saf3-4, iOS 1-3.2, Android ≤1.6 */
+    -moz-border-radius: 0;
+    border-radius: 0;
+    /* Opera 10.5, IE9, Saf5, Chrome, FF4+, iOS 4, Android 2.1+ */
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li:hover,
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li.selected {
+    background-color: #f5f5f5;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li:last-child {
+    border-bottom: none;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li > svg {
+    position: absolute;
+    margin-left: -22px;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li > b {
+    display: block;
+    font-size: 14px;
+    line-height: 1.1;
+    padding-bottom: 3px;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li p {
+    font-size: 12px;
+    line-height: 1.3;
+    margin: 0;
+    padding: 0;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li span {
+    font-size: 11px;
+    line-height: 1;
+    padding-top: 3px;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li span.index {
+    font-size: 11px;
+    color: #e9144b;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li span.link {
+    display: block;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li span.link span {
+    color: #e9144b;
+    font-size: 10px;
+    cursor: pointer;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tfoot {
+    background: #F5F5F5;
+    height: 25px;
+    color: #999;
+    font-size: 11px;
+    padding: 4px 16px 2px 16px;
+    text-align: center;
+    cursor: pointer;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tfoot span {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 11px;
+    line-height: 1;
+    padding: 3px 3px;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tfoot span:hover {
+    color: #e60f46;
+}
+.heremap-wrapper .heremap-outer-container .heremap-places table td.tfoot span.selected {
+    font-weight: bolder;
+    cursor: default;
+    color: #e60f46;
+}
+.info-bubble-content {
+    width: 200px;
+    font-size: 10px;
+    padding-left: 10px;
+}
+.info-bubble-content p {
+    margin: 0;
+    padding: 0;
+    font-size: 10px !important;
+}
+.info-bubble-content span.link span {
+    color: #e9144b;
+    font-size: 8px;
+    cursor: pointer;
+}
