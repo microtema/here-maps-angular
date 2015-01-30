@@ -1,9 +1,9 @@
 {
   "name": "here-maps-angular",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "homepage": "https://github.com/sevenfate/here-maps-angular.git",
   "authors": [
-    "'Mario <'7fatea@web.de'>"
+    "'Mario <'7fate@web.de'>"
   ],
   "description": "Web Component wrapper for Nokia HERE using Angular",
   "main": "./here-maps-angular.js",
@@ -20,6 +20,8 @@
   "ignore": [
     "**/.*",
     "node_modules",
+    "test",
+    "scripts",
     "bower_components"
   ],
   "dependencies": {

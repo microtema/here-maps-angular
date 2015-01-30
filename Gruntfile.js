@@ -21,18 +21,19 @@ module.exports = function (grunt) {
                 }
             }
         },
-        karma: {
-            unit: {
-                configFile: 'test/karma.conf.js',
-                singleRun: true
+        execute: {
+            target: {
+                src: ['scripts/server.js']
             }
         }
     });
 
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-express-server');
+    grunt.loadNpmTasks('grunt-execute');
 
 
     grunt.registerTask('test', ["express:test", "karma", "express:test:stop"]);
+    grunt.registerTask('server', ["execute"]);
 
 };

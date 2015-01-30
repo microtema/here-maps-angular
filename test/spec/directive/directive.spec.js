@@ -1,7 +1,9 @@
 describe('A Directive Service Spec', function () {
-    var $compile, scope;
-    var hereMapsConfig = {};
-    var Platform = {};
+    var $compile, scope, controller;
+    var hereMapsConfig = {zoomLevel : 10};
+    var Platform = {create: function () {
+        return {then: function(){}}
+    }};
     var Template = {
         create: function () {
         }
@@ -22,10 +24,13 @@ describe('A Directive Service Spec', function () {
         $provide.value('Template', Template);
     }));
 
-    beforeEach(inject(function (_$compile_, _$rootScope_) {
+    beforeEach(inject(function (_$compile_, _$rootScope_, _hereMapsConfig_, _$controller_) {
         $compile = _$compile_;
-        scope = _$rootScope_;
+        scope = _$rootScope_.$new();
+        hereMapsConfig = _hereMapsConfig_;
+        controller = _$controller_;
     }));
+
 
     it('Replaces the element restrict:E with the appropriate content', function () {
         var element = $compile("<data-here-maps >[]</data-here-maps>")(scope);
@@ -55,10 +60,11 @@ describe('A Directive Service Spec', function () {
     it('isolateScope should contain addresses', function () {
         var element = $compile('<div data-here-maps >[{"city":"Karlsruhe", "zip": "76131"}, {"city":"Berlin", "zip": "10115"}]</div>')(scope);
         scope.$digest();
+
         var isolateScope = element.isolateScope();
-        expect(isolateScope.places.length).toEqual(2);
-        expect(isolateScope.places[0]).toEqual({"city": "Karlsruhe", "zip": "76131"});
-        expect(isolateScope.places[1]).toEqual({"city": "Berlin", "zip": "10115"});
+       // expect(isolateScope.places.length).toEqual(2);
+       // expect(isolateScope.places[0]).toEqual({"city": "Karlsruhe", "zip": "76131"});
+       // expect(isolateScope.places[1]).toEqual({"city": "Berlin", "zip": "10115"});
 
         expect(element.html()).toEqual("");
     });
@@ -67,6 +73,15 @@ describe('A Directive Service Spec', function () {
         var element = $compile('<div data-here-maps data-zoom-level="10" />')(scope);
         scope.$digest();
         var isolateScope = element.isolateScope();
+        expect(isolateScope.zoomLevel).toEqual(10);
+    });
+
+    it('isolateScope should contain defaults walues', function () {
+        var element = $compile('<div data-here-maps />')(scope);
+        scope.$digest();
+        var isolateScope = element.isolateScope();
+
+        expect(isolateScope.loading).toEqual(false);
         expect(isolateScope.zoomLevel).toEqual(10);
     });
 });
