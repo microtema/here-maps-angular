@@ -20,6 +20,7 @@ module.exports = function (config) {
         files: [
             'bower_components/angular/angular.js',
             'node_modules/angular-mocks/angular-mocks.js',
+            'node_modules/jquery/dist/jquery.js',
             'bower_components/headjs/dist/1.0.0/head.js',
             'here-maps-angular.js',
             'test/mock/**/*.js',
