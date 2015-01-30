@@ -45,6 +45,7 @@
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    line-height: 20px;
 }
 
 .heremap-wrapper .heremap-outer-container .heremap-places table td.thead i {

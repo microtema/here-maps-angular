@@ -407,18 +407,19 @@ function HereMapsController($scope, $element, $window, $timeout, HereMapsRouting
     };
 
     $scope.resizeContainer = function HereMapsController_resizeContainer() {
-        var elem = $($element).find(".container-list ul").hide();
+        var elem = $($element).find(".container-list").hide();
         var parentElem = elem.parent();
         elem.height(parentElem.height()).show();
+        ($scope.map && $scope.map.getViewPort().resize());
     };
 
-    $scope.delayTimeMillis = 250;
+    $scope.delayTimeMillis = 100;
 
     $scope.resizeContainerWithDelay = function HereMapsController_resizeContainerWithDelay() {
         if ($scope.delayTimer) {
             $timeout.cancel($scope.delayTimer);
         }
-        $scope.delayTimer = $timeout($scope.resizeContainerWithDelay, $scope.delayTimeMillis);
+        $scope.delayTimer = $timeout($scope.resizeContainer, $scope.delayTimeMillis);
     };
 
     // on window resize we will redraw in delay 250 ms
