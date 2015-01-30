@@ -46,6 +46,7 @@
     -ms-user-select: none;
     user-select: none;
 }
+
 .heremap-wrapper .heremap-outer-container .heremap-places table td.thead i {
     background-image: url("/img/icon_nav_more.png");
     background-repeat: no-repeat;
@@ -61,7 +62,7 @@
 }
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list {
     width: 200px;
-    height: auto;
+    height: 100%;
     overflow: auto;
     overflow-x: hidden;
 }
@@ -69,6 +70,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
+    position: relative;
 }
 .heremap-wrapper .heremap-outer-container .heremap-places table td.tbody .container-list li {
     border-bottom: dotted 1px #b2b2b2;

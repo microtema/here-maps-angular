@@ -206,7 +206,7 @@ app.service("Template", function () {
     return tmpl;
 });
 app = angular.module('here-maps-angular-directives', []);
-app.directive("hereMaps", function (hereMapsConfig, Platform, Template, Geocoding, $compile, $timeout, $q) {
+app.directive("hereMaps", function (hereMapsConfig, Platform, Template, Geocoding, $compile, $timeout, $q, $interpolate) {
     return {
         restrict: 'EAC',
         scope: {},
@@ -214,7 +214,7 @@ app.directive("hereMaps", function (hereMapsConfig, Platform, Template, Geocodin
         replace: false,
         link: function (scope, element, attr) {
             var startTime = new Date().getTime();
-            console.info("start render here-map-angular...", new Date());
+            console.info("start render here-map-angular...");
             //apply attributes to scope and config
             angular.extend(hereMapsConfig, angular.fromJson(attr.appToken));
             scope.setAllRows(angular.fromJson(element.text() || "[]"));
@@ -224,7 +224,6 @@ app.directive("hereMaps", function (hereMapsConfig, Platform, Template, Geocodin
             var template = $compile(Template.create())(scope);
             element.empty().append(template);
 
-            //TODO find another to get element without jquery
             var mapContainer = $(element).find(".heremap").get(0);
             var map = null;
             var defaultLayers = null;
@@ -236,13 +235,13 @@ app.directive("hereMaps", function (hereMapsConfig, Platform, Template, Geocodin
 
                 console.info("start render platform...", {zoom: scope.zoomLevel});
                 defaultLayers = platform.createDefaultLayers();
-                scope.map = map = new H.Map(mapContainer, defaultLayers.normal.map, {zoom: scope.zoomLevel});
+                map = new H.Map(mapContainer, defaultLayers.normal.map, {zoom: scope.zoomLevel});
                 group = new H.map.Group();
                 map.addObject(group);
 
                 // MapEvents enables the event system
                 // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
-                var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+                new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
                 // Create the default UI components
                 ui = H.ui.UI.createDefault(map, defaultLayers, hereMapsConfig.defaultLanguage);
@@ -257,19 +256,19 @@ app.directive("hereMaps", function (hereMapsConfig, Platform, Template, Geocodin
 
                 //try to geocode / reverseGeocode
                 var promises = geocodePromises();
-
                 $q.all(promises).then(setViewBounds);
-
+                scope.map = map;
+                scope.resizeContainer();
             }
 
-            function setViewBounds(addresses){
+            function setViewBounds() {
                 map.setViewBounds(group.getBounds());
                 var objects = group.getObjects();
                 if (objects.length == 1) {
                     var data = objects[0].getData();
                     scope.zoomIn({zoom: scope.zoomLevel, lat: data.lat, lng: data.lng});
                 }
-                console.info("render here-map-angular done and took: ", new Date().getTime()-startTime);
+                console.info("render here-map-angular done and took: ", new Date().getTime() - startTime);
             }
 
             function tapEventListener(evt) {
@@ -286,28 +285,22 @@ app.directive("hereMaps", function (hereMapsConfig, Platform, Template, Geocodin
 
             function geocodePromises() {
                 var promises = [];
-                for (var index = 0; index < scope.pagedList.rows.length; index++) {
-                    var address = scope.pagedList.rows[index];
-                    var promise = Geocoding.geocode(address).then(function extendAddress(data) {
-                       console.log(data);
+                angular.forEach(scope.pagedList.rows, function geocodePromise(address) {
+                    promises.push(Geocoding.geocode(address).then(function extendAddress(data) {
                         angular.extend(address, data);
                         //create marker for this position
                         var marker = createMarker(address);
                         angular.extend(address, {marker: marker});
-
                         group.addObject(marker);
                         return address;
-                    });
-                    promises.push(promise);
-                }
+                    }));
+                });
                 return promises;
             }
 
-
-
-            $timeout(function () {
+            scope.$evalAsync(function () {
                 Platform.create().then(renderPlatform);
-            }, 1);
+            });
         }
     };
 
@@ -413,12 +406,8 @@ function HereMapsController($scope, $element, $window, $timeout, HereMapsRouting
         $scope.selected.marker.setZIndex($scope.zIndex++);
     };
 
-    $scope.renderMap = function () {
-        console.log("start render map...");
-    };
-
     $scope.resizeContainer = function HereMapsController_resizeContainer() {
-        var elem = $element.find(".container-list ul").hide();
+        var elem = $($element).find(".container-list ul").hide();
         var parentElem = elem.parent();
         elem.height(parentElem.height()).show();
     };
