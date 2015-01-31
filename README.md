@@ -77,7 +77,7 @@ You can install this package with bower
 
 ## License
 
-Dual licensed under GPLv2 & MIT
+Dual licensed under MIT
 
 Copyright © 2015 sefenfate 7fate@web.de
 
@@ -90,7 +90,3 @@ subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
-## Note
-
-This is not fully tested, so be careful when using it.
