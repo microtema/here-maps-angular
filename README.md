@@ -2,7 +2,12 @@
 Web Component for Nokia HERE Maps using Angular
 
 ## Install
-$ bower install here-maps-angular --save
+
+You can install this package with bower
+
+```
+    $ bower install here-maps-angular --save
+```
 
 ## Usage
 
@@ -29,6 +34,8 @@ $ bower install here-maps-angular --save
 	```
 	</here-maps>
 	```
+
+## Documentation
 
 ## Options
 
