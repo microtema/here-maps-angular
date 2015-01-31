@@ -25,21 +25,12 @@ module.exports = function (grunt) {
             target: {
                 src: ['scripts/server.js']
             }
-        },
-        bump: {
-            scripts: {
-                files: ["*.js", "test/spec/*.js", "css/*.css"],
-                updateConfigs: ["pcg"],
-                commitFiles: ["-a"],
-                push: false
-            }
         }
     });
 
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-express-server');
     grunt.loadNpmTasks('grunt-execute');
-    grunt.loadNpmTasks('grunt-bump');
 
 
     grunt.registerTask('test', ["express:test", "karma", "express:test:stop"]);
