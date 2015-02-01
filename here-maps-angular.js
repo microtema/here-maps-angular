@@ -6,8 +6,8 @@
 var app = angular.module('here-maps-angular', ["here-maps-angular-services", "here-maps-angular-directives"]);
 
 app.constant('hereMapsConfig', {
-    App_Id: "b1EnEFoJUlM7DxbOUluz",
-    App_Code: "9l73AMb88mO7U-udRkrIUQ",
+    App_Id: "",
+    App_Code: "",
     zoomLevel: 10,
     addressZoomLevel: 18,
     defaultLanguage: "en-US"
